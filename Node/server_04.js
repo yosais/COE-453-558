@@ -25,6 +25,10 @@ function f2(req, res, next){
     next()
 }
 
+function f3(req, res, next){
+    console.log('function 3')
+}
+
 app.listen(port, function() {
     console.log(`Example app listening on port ${port}`)
 })
