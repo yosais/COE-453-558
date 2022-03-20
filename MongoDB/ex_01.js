@@ -17,7 +17,7 @@ const Student_Schema = new mongoose.Schema({
         max: 20,
         default: 18
     },
-    createdAt: {
+    createdOn: {
         type: Date,
         immutable: true,
         default: () => Date.now()
