@@ -17,6 +17,11 @@ const Student_Schema = new mongoose.Schema({
         max: 20,
         default: 18
     },
+    email: {
+        type: String,
+        unique: true,
+        required: true
+    },
     createdOn: {
         type: Date,
         immutable: true,
@@ -27,12 +32,15 @@ const Student_Schema = new mongoose.Schema({
 // Define Student model (i.e., collection of students)
 const Student = mongoose.model('Student', Student_Schema)
 
-// Create a new student record (document)
+// Create a new instance of the model (i.e., document)
 const stu01 = new Student({
     name: "Ali Ahmad",
     id: "9999999999",
+    email: "aahmad@kfpm.ed.sa",
     age: 19
 })
+
+stu01.name = "Khaled Qasem"
 
 // Print new document (JSON object)
 console.log(stu01)

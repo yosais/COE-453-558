@@ -34,21 +34,19 @@ const stu01 = new Student({
     age: 19
 })
 
-// Print stu01; notice ObjectID
-console.log(stu01)
-
 // 1. Create (i.e., save) this new student (i.e., document) to the database
 stu01.save().then(() => console.log("Saved!"))
 
-// // 2. Read (i.e., find) all students with this ID. Returned in an array
-// //Student.find({"id": "9999999999"}).then((doc) => console.log(doc))
-// //                                     .catch((err) => console.log(err))
+// 2. Read (i.e., find) all students with this ID. Returned in an array
+// Will print only matching documents already in database
+Student.find({"id": "9999999999"}).then((doc) => console.log(doc))
+                                      .catch((err) => console.log(err))
 
-// // 3. Update 
-// const filter = {name : "Ali Ahmad"}
-// const update = {age : 22}
-// Student.findOneAndUpdate(filter, update).then( (doc) => {console.log(doc)} )
-// Student.findOne(filter).then( (doc) => {console.log(doc)} ) 
+// 3. Update 
+const filter = {name : "Ali Ahmad"}
+const update = {age : 22}
+Student.findOneAndUpdate(filter, update).then( (doc) => {console.log(doc)} )
+Student.findOne(filter).then( (doc) => {console.log(doc)} ) 
 
-// // 4. Delete all students (documents) with this student id
-// //Student.deleteMany({"id": "9999999999"}).then(() => {console.log("Deleted all documents")} )
+// 4. Delete all students (documents) with this student id
+Student.deleteMany({"id": "9999999999"}).then(() => {console.log("Deleted all documents")} )
