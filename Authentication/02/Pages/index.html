@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>HTML Form</h1>
+    <form id="myForm">
+        <label>Username: </label>
+        <input type="text" name="username"><br>
+        <label>Password: </label>
+        <input type="text" name="password"><br><br>
+        <input type="submit" value="Submit">
+    </form> 
+
+    <script>
+        myForm.addEventListener('submit', e => {
+            e.preventDefault()
+            let url = 'http://localhost:7000/login'
+            let data = {}
+            new FormData(myForm).forEach( (value, key) => data[key] = value)
+            fetch(url, {
+                method: 'POST',
+                headers : { 
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                body: JSON.stringify(data)
+            }).then( res => res.json() )
+              .then( json_obj => console.log(json_obj) )
+              .catch( err => console.log(err) )
+        })
+    </script>
+</body>
+</html>
+
