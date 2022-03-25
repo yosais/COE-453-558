@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Just Add!</title>
+    </head>
+<body>
+    <h1>Just Add!</h1>
+    <p>Invest in our product!</p>
+
+    <form id="myForm">
+        <label>X: </label>
+        <input type="text" name="X"><br>
+        <label>Y: </label>
+        <input type="text" name="Y"><br><br>
+        <input type="submit" value="Submit">
+    </form> 
+
+    Result: </h2> 
+    <div id="result"></div>
+
+    <script>
+        myForm.addEventListener('submit', e => {
+            e.preventDefault()
+            
+            let numbers = {}
+            new FormData(myForm).forEach( (value, key) => numbers[key] = value)
+            
+            let request = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(numbers)
+            }
+            
+            fetch('/add', request).then( res => res.json() )
+              .then( data => {
+                document.getElementById('result').innerHTML = data.result;
+              })
+              .catch( err => console.log(err) )
+        })
+    </script>
+</body>
+</html>
+

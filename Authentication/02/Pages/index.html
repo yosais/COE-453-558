@@ -13,18 +13,20 @@
     <script>
         myForm.addEventListener('submit', e => {
             e.preventDefault()
-            let url = 'http://localhost:7000/login'
+            
             let data = {}
             new FormData(myForm).forEach( (value, key) => data[key] = value)
-            fetch(url, {
+            
+            let request = {
                 method: 'POST',
-                headers : { 
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
+                headers: {
+                'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(data)
-            }).then( res => res.json() )
-              .then( json_obj => console.log(json_obj) )
+            }
+            
+            fetch('login', request).then( res => res.json() )
+              .then( data => console.log(data) )
               .catch( err => console.log(err) )
         })
     </script>
