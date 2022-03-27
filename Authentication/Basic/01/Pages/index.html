@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Just Add!</title>
+</head>
+<body>
+    <h1>Just Add!</h1>
+    <p>Everytime you click on the browser's Refresh button, an HTTP request is sent!</p>
+    
+    <h2>Result: </h2> 
+    <div id="result"></div>
+
+    <script>
+        numbers = { 
+            "x": 3, 
+            "y": 4 
+        }
+        
+        // Use the btoa function (fn: string -> string) to create a base-64 encoded 
+        // ASCII string (encoded) from a string (username:password) of binary data
+        let encoded = window.btoa('yosais:pass123')
+        let auth = 'Basic ' + encoded
+        console.log(auth)
+
+        let request = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': auth
+            },
+            body: JSON.stringify(numbers)
+        }
+  
+        // Call the Add REST API
+        let fetchRes = fetch('/add', request)
+            .then(res => res.json())
+            .then(data => { 
+                document.getElementById('result').innerHTML = data.result; 
+            })
+            .catch( err => console.log(err) )
+    </script>
+</body>
+</html>

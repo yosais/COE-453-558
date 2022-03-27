@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Just Add!</title>
+    </head>
+<body>
+    <h1>Just Add!</h1>
+    <p>Invest in our product!</p>
+
+    <form id="myForm">
+        <label>X: </label>
+        <input type="text" name="X"><br>
+        <label>Y: </label>
+        <input type="text" name="Y"><br><br>
+        <input type="submit" value="Submit">
+    </form> 
+
+    Result: </h2> 
+    <div id="result"></div>
+
+    <script>
+        myForm.addEventListener('submit', e => {
+            e.preventDefault()
+            
+            let numbers = {}
+            new FormData(myForm).forEach( (value, key) => numbers[key] = value)
+            
+            let encoded = window.btoa('yosais:pass13')
+            let auth = 'Basic ' + encoded
+
+            let request = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': auth
+                },
+                body: JSON.stringify(numbers)
+            }
+            
+            fetch('/add', request)
+            .then(function(response){
+                if(response.status == '200'){
+                    return response.json()
+                }
+                else if(response.status == '401'){
+                    console.log('Wrong username and/or password!')
+                    throw new Error("Cannot continue to next stage in pipeline");
+                }
+            })
+            .then( data => document.getElementById('result').innerHTML = data.result )
+            .catch( err => console.log(err) )
+        })
+    </script>
+</body>
+</html>
+
