@@ -1,0 +1,12 @@
+// You have to first install Docker desktop on your development machine
+// https://www.docker.com/products/docker-desktop/
+
+1. Build the Docker image
+
+    >> docker build -t my-web-app .
+
+2. Create a container from the Docker image
+
+    >> docker run -it -p 7000:3000 my-web-app
+
+3. To display the web page, go to http://localhost:7000/

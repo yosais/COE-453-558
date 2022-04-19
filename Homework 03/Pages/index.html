@@ -33,6 +33,8 @@
                 body: JSON.stringify(numbers)
             }
             
+            console.log(JSON.stringify(numbers))
+
             fetch('/add', request).then( res => res.json() )
               .then( data => {
                 document.getElementById('result').innerHTML = data.result;
